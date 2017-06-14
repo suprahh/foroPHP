@@ -6,7 +6,7 @@
 </head>
 <?php
 				$mysqli = new mysqli('localhost','root','','forowebphp');
-
+                
 				if (isset($_POST['agregar'])) {
 					$user = $_POST['usuario'];
 					$clave = $_POST['clave'];
@@ -27,7 +27,7 @@
 				}
 	?>
 <body>
-<form name="formRegistro" id="formRegistro" method="post" enctype="multipart/form-data">
+<form name="formRegistro" id="formRegistro" method="post" action="registrar.php" enctype="multipart/form-data">
 	<div>
 		<div>
 		<label>Usuario:</label>
@@ -70,7 +70,7 @@
 		</div>
 		<div>
 		<input type="submit" id="agregar" name="agregar" value="Registrar">
-		
+		<a href="index.php">Login</a>
 		</div>
 	</div>
 </form>

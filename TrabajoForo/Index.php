@@ -3,9 +3,12 @@
 <head>
 	<title>Bienvenido</title>
 </head>
+
+
+
 <body>
 
-<form name="formIndex" id="formIndex" method="post">
+<form name="formIndex" id="formIndex" method="post" action="Foro.php">
 	<div>
 		<div>
 		<label>Usuario :</label>
