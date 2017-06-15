@@ -43,6 +43,16 @@
 						echo "se agrego correctamente";
 					}
 				 }
+
+         if(isset($_GET['id']))
+          {
+          $id = $_GET['id'];
+          $sql = "delete from publicacion where Id = '$id' ";
+         $eliminar = $mysqli->query($sql);
+        if(!$eliminar)
+         { echo "Error al eliminar";}
+         }
+       
       ?>
 <body>
 <form name="formForo" id="formForo" method="post" action="Foro.php">
@@ -51,7 +61,7 @@
 	     <label"><?php echo "bienvenido ".$_SESSION['usuario'] ;?> </label>
        <label><?php 
            if ($_SESSION['privilegio']==1) {
-             echo "<a href='mantenedor.php' >Administracion Foro</a>";
+             echo "<a href='mantenedor.php' >Usuarios</a>";
            }
            else{
              echo "Disfruta nuestro foro";
@@ -60,13 +70,15 @@
 	</div>
 	<div>
            <?php  
-               $sql = "select usuario.Usuario, usuario.Imagen, publicacion.Contenido,publicacion.Fecha from publicacion inner join usuario on publicacion.Id_User = usuario.Id_User";
-               //SELECT usuario.Usuario, usuario.Imagen, publicacion.Contenido, publicacion.Fecha FROM publicacion INNER JOIN usuario on publicacion.Id_User = usuario.Id_User 
+               $sql = "select usuario.Usuario, usuario.Imagen, publicacion.Contenido,publicacion.Fecha, publicacion.Id from publicacion inner join usuario on publicacion.Id_User = usuario.Id_User";
                $listado = $mysqli->query($sql);
                while ($registro = $listado->fetch_array()) {
                	   ?>
                	   <div>
                   <span>Publicado a las : <?php echo $registro['Fecha'] ?> por : <?php echo $registro['Usuario'] ?> </span>
+                   <?php if ($_SESSION['privilegio']==1) {?>
+                       <a href="Foro.php?id=<?php echo $registro['Id']; ?>"> Eliminar </a>
+                    <?php } ?>
                    <p><?php echo $registro['Contenido']; ?></p>
                    </div>
              <?php  } ?>

@@ -28,12 +28,30 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 
            }
        }
-    /*   if (isset($_POST['btgrabar'])) {
-
-       	$privilegioM = $_POST[];
-             $query =   "UPDATE usuario SET Usuario ='".$_POST['usuario']"'' , Clave ='"$_POST['clave']"'' , Privilegio = valor WHERE Id_User= Id_User"
+      if (isset($_POST['btgrabar'])) {
+     
+       	$privilegioM = $_POST['permiso'];
+       	$usuario = $_POST['usuario'];
+       	$clave = $_POST['clave'];
+        $query =   "UPDATE usuario SET Usuario = '$usuario' , Clave ='$clave' , Privilegio = '$privilegioM' WHERE Usuario = '$usuario'";
+          $Modificar = $mysqli->query($query);
+         if (!$Modificar) {
+          	echo "no se pudo modificar";
+          }
        }
-*/
+
+       if (isset($_POST['bteliminar'])) {
+
+       	   $query =  "DELETE FROM usuario  WHERE usuario.Id_User = ".$_POST['user'];
+       	   $borrar = $mysqli->query($query);
+       	    if (!$borrar) {
+          	echo "no se pudo eliminar";
+          }
+          else {
+          	echo "se eliminino correctamente";
+          }
+       }
+
 
 
 
@@ -55,7 +73,7 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
      <label>Tipo Usuario :</label> 
   <?php
         if ($privilegio=="Administrador") {
-        	echo "<select 'permiso'>
+        	echo "<select name='permiso'>
 	                 <option value ='1'>".$privilegio."</option>
 	                 <option value='0'>Usuario</option>
                 </select>";
