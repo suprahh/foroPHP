@@ -8,7 +8,7 @@
 
 <body>
 
-<form name="formIndex" id="formIndex" method="post" action="Foro.php">
+<form name="formIndex" id="formIndex" method="post" action="validar_registro.php">
 	<div>
 		<div>
 		<label>Usuario :</label>

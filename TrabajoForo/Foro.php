@@ -6,27 +6,15 @@
 <?php 
 
  $mysqli = new mysqli('localhost','root','','forowebphp');
-  if (isset($_POST['usuario']) && isset($_POST['clave'])) {
-  	$usuario = $_POST['usuario'];
-  	$clave = $_POST['clave'];
-	$query = "select * from usuario where Usuario = '$usuario' and Clave = '$clave'";
-	$buscar = $mysqli->query($query);
-	$numero = $buscar->num_rows;
-	 if ($numero==0) {
-		header('Location: http://localhost/TrabajoForo/');
-	}
-	else
-	{
-		session_start();
-		$_SESSION["usuario"] = $usuario;
-	}      
-  }
+      if (empty($_SESSION["usuario"])) {
+         session_start();
+
+      } 
+
 
   if (isset($_POST['publicacion'])) {
 
-     if (empty($_SESSION["usuario"])) {
-         session_start();
-      }  
+    
       $usuario =$_SESSION["usuario"];
       $dt = time();
       $hoy = strftime("%Y-%m-%d %H:%M:%S", $dt);
@@ -60,7 +48,15 @@
 <form name="formForo" id="formForo" method="post" action="Foro.php">
 	<div>
 	     <a href="index.php">Salir</a>
-	     <label"><?php echo $_SESSION['usuario'] ?></label>
+	     <label"><?php echo "bienvenido ".$_SESSION['usuario'] ;?> </label>
+       <label><?php 
+           if ($_SESSION['privilegio']==1) {
+             echo "<a href='mantenedor.php' >Administracion Foro</a>";
+           }
+           else{
+             echo "Disfruta nuestro foro";
+           }
+       ?></label>
 	</div>
 	<div>
            <?php  
