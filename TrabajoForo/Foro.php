@@ -75,9 +75,10 @@
                while ($registro = $listado->fetch_array()) {
                	   ?>
                	   <div>
+                  <img  src="fotos/<?php echo $registro['Imagen']; ?>" style="width: 50px; border-radius: 25px;">
                   <span>Publicado a las : <?php echo $registro['Fecha'] ?> por : <?php echo $registro['Usuario'] ?> </span>
                    <?php if ($_SESSION['privilegio']==1) {?>
-                       <a href="Foro.php?id=<?php echo $registro['Id']; ?>"> Eliminar </a>
+                       <a href="Foro.php? id=<?php echo $registro['Id']; ?>"> Eliminar </a>
                     <?php } ?>
                    <p><?php echo $registro['Contenido']; ?></p>
                    </div>

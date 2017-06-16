@@ -14,7 +14,7 @@
 					$apellido = $_POST['apellido'];
 					$foto = $_FILES['foto']['name'];
 					$nacionalidad = $_POST['naci'];
-					$query = "insert into usuario values (null,'$user','$clave','$nombre', '$apellido', '$foto', '$nacionalidad') ";
+					$query = "INSERT INTO `usuario`(`Id_User`, `Usuario`, `Clave`, `Nombre`, `Apellido`, `Imagen`, `Nacionalidad_user`, `Privilegio`) VALUES (null,'$user','$clave','$nombre','$apellido','$foto','$nacionalidad','0')";
 					$agregar = $mysqli->query($query);
 					if (!$agregar) {
 					    echo "Error de almacenamiento";

@@ -11,12 +11,15 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
                
       }
       if (isset($_POST['btmodificar'])) {
-       	   $query = "SELECT * FROM `usuario` WHERE Id_User =".$_POST['user'];
+      	if (isset($_POST['user'])) {
+      		 $query = "SELECT * FROM `usuario` WHERE Id_User =".$_POST['user'];
        	   $listado = $mysqli->query($query);
        	   $user = null;
        	   $clave = null;
+       	   $idUser = null;
        	   $privilegio = null;
            while ($registro = $listado->fetch_array()) {  
+                     $idUser = $registro['Id_User'];
                      $user = $registro['Usuario'];
                      $clave = $registro['Clave'];
                      if ($registro['Privilegio']==1) {
@@ -25,15 +28,20 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
                      else{
                      	 $privilegio = "Usuario";
                      }
+      	}
+       	  
 
+           }
+           else{
+           	echo "tienes que seleccionar un usuario para modificarlo";
            }
        }
       if (isset($_POST['btgrabar'])) {
-     
+        $idUser = $_POST['idUser'];
        	$privilegioM = $_POST['permiso'];
        	$usuario = $_POST['usuario'];
        	$clave = $_POST['clave'];
-        $query =   "UPDATE usuario SET Usuario = '$usuario' , Clave ='$clave' , Privilegio = '$privilegioM' WHERE Usuario = '$usuario'";
+        $query =   "UPDATE usuario SET Usuario = '$usuario' , Clave ='$clave' , Privilegio = '$privilegioM' WHERE Id_User = '$idUser'";
           $Modificar = $mysqli->query($query);
          if (!$Modificar) {
           	echo "no se pudo modificar";
@@ -42,8 +50,14 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 
        if (isset($_POST['bteliminar'])) {
 
-       	   $query =  "DELETE FROM usuario  WHERE usuario.Id_User = ".$_POST['user'];
-       	   $borrar = $mysqli->query($query);
+           $Id_User = $_POST['user'];
+           $eliminarPublicaciones = "DELETE FROM publicacion WHERE Id_User = '$Id_User'";
+           $borrar = $mysqli->query($eliminarPublicaciones);
+            if (!$borrar) {
+          	echo "no se pudo eliminar las publicacion";
+          }
+       	   $eliminarUsuario =  "DELETE FROM usuario  WHERE Id_User = '$Id_User' ";
+       	   $borrar = $mysqli->query($eliminarUsuario);
        	    if (!$borrar) {
           	echo "no se pudo eliminar";
           }
@@ -61,7 +75,11 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 <form name="formManten" id="formManten" method="post" action="mantenedor.php">
 <?php    
      if (isset($_POST['btmodificar'])) {
- ?><div>
+     	if (isset($_POST['user'])) { ?>
+     		<div>
+     <input type="text" name="idUser" style="visibility:hidden" value="<?php echo $idUser; ?>" >
+   </div>
+   <div>
    <label>Usuario :</label>
    <input type="text" name="usuario" value="<?php echo $user; ?>">	
 </div>
@@ -84,8 +102,8 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 	                 <option value='1'>Administrador</option>
                 </select>";
         }
-
-  }
+     }
+   }
   else
   	{?><div>
    <label>Usuario :</label>
