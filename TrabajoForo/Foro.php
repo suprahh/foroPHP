@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="Stylesheet" href="css/estilo.css"/>
 	<title>Foro</title>
 </head>
 <?php 
@@ -55,11 +56,12 @@
        
       ?>
 <body>
+<div class="contenedorGeneral">
 <form name="formForo" id="formForo" method="post" action="Foro.php">
-	<div>
-	     <a href="index.php">Salir</a>
-	     <label"><?php echo "bienvenido ".$_SESSION['usuario'] ;?> </label>
-       <label><?php 
+	<div id="Menu">
+	     
+	     <label id="b1"><?php echo "Bienvenido ".$_SESSION['usuario'] ;?> </label>
+       <label id="b1"><?php 
            if ($_SESSION['privilegio']==1) {
              echo "<a href='mantenedor.php' >Usuarios</a>";
            }
@@ -67,28 +69,33 @@
              echo "Disfruta nuestro foro";
            }
        ?></label>
+       <a  href="index.php">Salir</a>
 	</div>
-	<div>
+	<div id="publicaciones">
+  <div >
            <?php  
                $sql = "select usuario.Usuario, usuario.Imagen, publicacion.Contenido,publicacion.Fecha, publicacion.Id from publicacion inner join usuario on publicacion.Id_User = usuario.Id_User";
                $listado = $mysqli->query($sql);
                while ($registro = $listado->fetch_array()) {
                	   ?>
-               	   <div>
+               	   <div id="post">
                   <img  src="fotos/<?php echo $registro['Imagen']; ?>" style="width: 50px; border-radius: 25px;">
                   <span>Publicado a las : <?php echo $registro['Fecha'] ?> por : <?php echo $registro['Usuario'] ?> </span>
                    <?php if ($_SESSION['privilegio']==1) {?>
-                       <a href="Foro.php? id=<?php echo $registro['Id']; ?>"> Eliminar </a>
+                       <a class="eliminar" href="Foro.php? id=<?php echo $registro['Id']; ?>"> Eliminar </a>
                     <?php } ?>
+                    
                    <p><?php echo $registro['Contenido']; ?></p>
                    </div>
              <?php  } ?>
            
 	</div>
-	<div>
+	<div id="publicacion1">
           <textarea name="publicacion" rows="4" cols="50">Escribe una publicacion <?php echo $_SESSION['usuario']  ?> .. . .</textarea>
-          <input type="submit" name="publicar" value="publicar"> 
+          <input id="publicar" type="submit" name="publicar" value="publicar"> 
 	</div>
+  </div>
 </form>
+</div>
 </body>
 </html>

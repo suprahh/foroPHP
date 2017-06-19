@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="Stylesheet" href="css/estilo.css"/>
 	<title>Registro</title>
 	
 </head>
@@ -27,6 +28,7 @@
 				}
 	?>
 <body>
+<div class="contenedor">
 <form name="formRegistro" id="formRegistro" method="post" action="registrar.php" enctype="multipart/form-data">
 	<div>
 		<div>
@@ -68,11 +70,12 @@
   			 </select> 
 		   
 		</div>
-		<div>
-		<input type="submit" id="agregar" name="agregar" value="Registrar">
-		<a href="index.php">Login</a>
+		<div id="reg">
+		<input class="boton" type="submit" id="agregar" name="agregar" value="Registrar">
+		<a id="login" href="index.php">Login</a>
 		</div>
 	</div>
 </form>
+</div>
 </body>
 </html>

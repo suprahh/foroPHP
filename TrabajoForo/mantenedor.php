@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="Stylesheet" href="css/estilo.css"/>
 	<title>Mantenedor Usuarios</title>
 </head>
 <?php
@@ -71,21 +72,24 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 
  ?>
 <body>
+<div class="mantenedor">
 <h2>MANTENCION USUARIOS</h2>
 <form name="formManten" id="formManten" method="post" action="mantenedor.php">
+<div id="contenedor">
 <?php    
      if (isset($_POST['btmodificar'])) {
      	if (isset($_POST['user'])) { ?>
      		<div>
-     <input type="text" name="idUser" style="visibility:hidden" value="<?php echo $idUser; ?>" >
+     <input class="caja" type="text" name="idUser" style="visibility:hidden" value="<?php echo $idUser; ?>" >
    </div>
+   
    <div>
    <label>Usuario :</label>
-   <input type="text" name="usuario" value="<?php echo $user; ?>">	
-</div>
+   <input class="caja" type="text" name="usuario" value="<?php echo $user; ?>">	
+  </div>
 <div>
 	<label>Clave :</label>
-	<input type="text" name="clave" value="<?php echo $clave ?> ">
+	<input class="caja" type="text" name="clave" value="<?php echo $clave ?> ">
 </div>
 <div>
      <label>Tipo Usuario :</label> 
@@ -105,7 +109,9 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
      }
    }
   else
-  	{?><div>
+  	{?>
+
+  <div>
    <label>Usuario :</label>
    <input type="text" name="usuario">	
 </div>
@@ -120,15 +126,16 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
       </select>
   		<?php }?>
 </div>
-<div>
-	<input type="submit" name="btgrabar" value="grabar">
+<div id="seccionBotones">
+	<input class="boton" type="submit" name="btgrabar" value="Grabar">
 </div>
-<div>
-	<div><label>Usuario</label></div>
-	<div><label>Clave</label></div>
-	<div><label>Tipo</label></div>
-	<div><label>Seleccione</label></div>
 </div>
+<table>
+<tr>
+  <th>Usuario</th>
+  <th>Clave</th>
+  <th>Privilegio</th>
+</tr>
 <?php  
       
             $query = "SELECT * FROM `usuario` ";
@@ -136,25 +143,29 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
             while ($registro = $listado->fetch_array()) {
 ?>     
            <div> 
-                 <div><?php echo $registro['Usuario'];   ?> </div>
-                 <div><?php echo $registro['Clave'];   ?> </div>
-                 <div><?php  if ($registro['Privilegio']==1) {
+           <tr>
+                 <td><?php echo $registro['Usuario'];   ?> </td>
+                 <td><?php echo $registro['Clave'];   ?> </td>
+                 <td><?php  if ($registro['Privilegio']==1) {
                        echo "Administrador";   
                  }
                  else{
                  	echo "Usuario";
                  }
-                   ?> </div>
-                 <div> <input type="radio" name="user" value="<?php echo $registro['Id_User']; ?>"> </div>
+                   ?> </td>
+                   
+                 <td> <input type="radio" name="user" value="<?php echo $registro['Id_User']; ?>"> </td>
+                 </tr>
            </div>   
  <?php } ?>
   	
-
-<div>
-	<input type="submit" name="bteliminar" value="Eliminar">
-	<input type="submit" name="btmodificar" value="Modificar">
+</table>
+<div id="seccionBotones">
+	<input class="boton" type="submit" name="bteliminar" value="Eliminar">
+	<input class="boton" type="submit" name="btmodificar" value="Modificar">
 </div>
 </form>
+</div>
 </body>
 </html>
 
