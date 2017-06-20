@@ -7,7 +7,8 @@
 	$buscar = $mysqli->query($query);
 	$numero = $buscar->num_rows;
 	 if ($numero==0) {
-		header('Location: http://localhost/TrabajoForo/');
+		header('Location: http://localhost/TrabajoForo/registrar.php');
+
 	}
 	else
 	{

@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="Stylesheet" href="css/estilo.css"/>
+  <link rel="icon" href="fotos/icono.ico">
+  <meta charset="utf-8"> 
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/validar_form1.js"></script>
+  <link rel="Stylesheet"  type="text/css" href="css/estilo.css"/>
+  <link rel="stylesheet" rel="stylesheet" type="text/css" href="css/sweetalert.css">
 	<title>Mantenedor Usuarios</title>
 </head>
 <?php
@@ -34,7 +39,8 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
 
            }
            else{
-           	echo "tienes que seleccionar un usuario para modificarlo";
+             echo  "<script type='text/javascript'>swal('debes seleccionar un usuario') ;</script>"; 
+             header('Location: http://localhost/TrabajoForo/mantenedor.php');
            }
        }
       if (isset($_POST['btgrabar'])) {
@@ -42,30 +48,42 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
        	$privilegioM = $_POST['permiso'];
        	$usuario = $_POST['usuario'];
        	$clave = $_POST['clave'];
-        $query =   "UPDATE usuario SET Usuario = '$usuario' , Clave ='$clave' , Privilegio = '$privilegioM' WHERE Id_User = '$idUser'";
+        if ($usuario =="" || $clave=="") {
+          $query =   "UPDATE usuario SET Usuario = '$usuario' , Clave ='$clave' , Privilegio = '$privilegioM' WHERE Id_User = '$idUser'";
           $Modificar = $mysqli->query($query);
+        }
+       
          if (!$Modificar) {
           	echo "no se pudo modificar";
           }
        }
 
        if (isset($_POST['bteliminar'])) {
-
-           $Id_User = $_POST['user'];
+          if (isset($_POST['user'])) {
+            $Id_User = $_POST['user'];
            $eliminarPublicaciones = "DELETE FROM publicacion WHERE Id_User = '$Id_User'";
            $borrar = $mysqli->query($eliminarPublicaciones);
             if (!$borrar) {
-          	echo "no se pudo eliminar las publicacion";
+            echo "no se pudo eliminar las publicacion";
           }
-       	   $eliminarUsuario =  "DELETE FROM usuario  WHERE Id_User = '$Id_User' ";
-       	   $borrar = $mysqli->query($eliminarUsuario);
-       	    if (!$borrar) {
-          	echo "no se pudo eliminar";
+           $eliminarUsuario =  "DELETE FROM usuario  WHERE Id_User = '$Id_User' ";
+           $borrar = $mysqli->query($eliminarUsuario);
+            if (!$borrar) {
+            echo "no se pudo eliminar";
           }
           else {
-          	echo "se eliminino correctamente";
+            echo "se eliminino correctamente";
           }
+        }
+         else{
+             echo  "<script type='text/javascript'>swal('debes seleccionar un usuario') ;</script>"; 
+             header('Location: http://localhost/TrabajoForo/mantenedor.php');
+           }
+      
+
+          
        }
+
 
 
 
@@ -126,8 +144,9 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
       </select>
   		<?php }?>
 </div>
-<div id="seccionBotones">
+<div class="seccionBotones">
 	<input class="boton" type="submit" name="btgrabar" value="Grabar">
+  <a href="foro.php">Volver al foro</a>
 </div>
 </div>
 <table>
@@ -160,7 +179,7 @@ $mysqli = new mysqli('localhost','root','','forowebphp');
  <?php } ?>
   	
 </table>
-<div id="seccionBotones">
+<div class="seccionBotones">
 	<input class="boton" type="submit" name="bteliminar" value="Eliminar">
 	<input class="boton" type="submit" name="btmodificar" value="Modificar">
 </div>

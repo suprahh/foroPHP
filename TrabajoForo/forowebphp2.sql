@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2017 a las 22:27:49
+-- Tiempo de generación: 19-06-2017 a las 21:30:48
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 5.6.25
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `forowebphp`
 --
+CREATE DATABASE IF NOT EXISTS `forowebphp` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `forowebphp`;
 
 -- --------------------------------------------------------
 
@@ -59,12 +61,9 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`Id`, `Fecha`, `Contenido`, `Id_User`) VALUES
-(1, '2017-06-12 07:14:29', 'este es el primer post ;-;', 2),
-(2, '2017-06-14 03:20:18', 'primer post', 1),
-(3, '2017-06-14 16:21:40', 'holaaaassssss', 1),
-(4, '2017-06-14 16:21:52', 'contesteeeennnnn', 1),
-(5, '2017-06-14 16:40:35', 'probando hora', 1),
-(6, '2017-06-14 12:41:43', 'probando de nuevo', 1);
+(67, '2017-06-19 17:50:42', 'Escribe una publicacion carlog .. . .', 1),
+(71, '2017-06-19 21:14:13', 'probando denuevo', 1),
+(72, '2017-06-19 21:17:05', 'hola soy nuevo', 55);
 
 -- --------------------------------------------------------
 
@@ -88,13 +87,15 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Id_User`, `Usuario`, `Clave`, `Nombre`, `Apellido`, `Imagen`, `Nacionalidad_user`, `Privilegio`) VALUES
-(1, 'carlog', 'carlo123', 'carlos', 'gonzalez', 'carlos.jpg', 11, 1),
-(2, 'nibalty', 'nicolcita', 'nicole', 'baltierra', 'nicole.jpg', 11, 0),
-(3, 'cochi', 'cochi123', 'carlos', 'balti', 'YOeFoMLO.jpg', 11, 0),
-(4, 'prueba', 'prueba1', 'pruebin', 'prueba', 'Logo.png', 12, 0),
-(5, 'prueba2', 'prueba12', 'pruebin2', 'prueba2', 'Logo.png', 13, 0),
-(6, 'prueba4', 'prueba4', 'prueba4', 'prueba4', 'tarjeta2.png', 14, 0),
-(7, 'prueba4', 'prueba4', 'prueba4', 'prueba4', 'tarjeta2.png', 14, 0);
+(1, 'carlog', 'carlo123', 'carlos', 'gonzalez', 'user.png', 11, 1),
+(8, 'Admin', 'admin ', 'administrador', 'capooo', 'admin.png', 11, 1),
+(9, 'indu', 'asp ', 'apu', '.net', 'asp.png', 12, 0),
+(10, 'tal', 'ivan', 'talivan', 'talivan', 'taliban.png', 14, 0),
+(22, 'pedrito', 'pedrito1', 'pedro', 'perez', 'asp.png', 11, 0),
+(23, 'pedrito', 'pedrito1', 'pedro', 'perez', 'asp.png', 11, 0),
+(24, 'juan', 'juan1', 'juan', 'juanez', 'admin.png', 12, 0),
+(25, 'pedritox', 'pedrito1', 'carlos', 'balti', 'admin.png', 11, 0),
+(55, 'prueba10', 'prueba1', 'userprueba', 'prueba', 'photo.jpg', 11, 0);
 
 --
 -- Índices para tablas volcadas
@@ -133,12 +134,12 @@ ALTER TABLE `nacionalidad`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero unico de publicacion', AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero unico de publicacion', AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Id_User` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de los usuarios', AUTO_INCREMENT=8;
+  MODIFY `Id_User` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de los usuarios', AUTO_INCREMENT=56;
 --
 -- Restricciones para tablas volcadas
 --
